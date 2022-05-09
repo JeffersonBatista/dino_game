@@ -24,20 +24,33 @@ function jump() {
             position -= 20;
             dino.style.bottom = position + 'px';
           }
-        }, 15);
+        }, 25);
       } else {
         position += 20;
         dino.style.bottom = position + 'px';
       }
-    }, 15);
+    }, 25);
   }
 
 function createCactus(){
     const cactus = document.createElement('div');
-    let cactusPosition = 1000;
+    let cactusPosition = 1500;
+    let randomTime = Math.random() * 6000;
+
     cactus.classList.add('cactus');
-    cactus.style.left = 1000 + 'px';
+    cactus.style.left = 1500 + 'px';
     background.appendChild(cactus);
+
+    let leftInterval = setInterval(() => {
+        if(cactusPosition < -60){
+            clearInterval(leftInterval);
+            background.removeChild(cactus);
+        } else {
+            cactusPosition -= 10;
+            cactus.style.left = cactusPosition + 'px';
+        }
+    }, 20);
+    setTimeout(createCactus, randomTime);
 }
 
 createCactus();
